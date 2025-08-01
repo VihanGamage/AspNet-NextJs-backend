@@ -29,5 +29,11 @@ public class ProductController:ControllerBase
         return await _productService.AddAsync(product);
     }
     
+    [HttpGet("{id}")]
+    public async Task<Product> getById(int id)
+    {
+        return await _productService.GetByIdAsync(id);
+    }
+    
     
 }

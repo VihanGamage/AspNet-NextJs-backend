@@ -23,4 +23,12 @@ public class ProductService
     {
         return await _productRepo.AddAsync(product);
     }
+    
+    public async Task<Product?> GetByIdAsync(int id)
+    {
+        return await _productRepo.GetByIdAsync(id);
+    }
+    
+     
+    
 }
