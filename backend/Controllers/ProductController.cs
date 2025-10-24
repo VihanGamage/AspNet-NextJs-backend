@@ -8,31 +8,25 @@ namespace backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductController:ControllerBase
+public class ProductController(ProductService productService):ControllerBase
 {
-    private readonly ProductService  _productService;
-    
-    public ProductController(ProductService  productService) 
-    {
-        _productService = productService;
-    }
 
     [HttpGet]
-    public async Task<List<Product>> getAll()
+    public async Task<List<Product>> GetAll()
     {
-        return await _productService.GetAllProducts();
+        return await productService.GetAllProducts();
     }
 
     [HttpPost]
     public async Task<Product> Add([FromBody] Product product)
     {
-        return await _productService.AddAsync(product);
+        return await productService.AddAsync(product);
     }
     
     [HttpGet("{id}")]
-    public async Task<Product> getById(int id)
+    public async Task<Product?> GetById(int id)
     {
-        return await _productService.GetByIdAsync(id);
+        return await productService.GetByIdAsync(id);
     }
     
     

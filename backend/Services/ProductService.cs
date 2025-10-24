@@ -5,28 +5,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services;
 
-public class ProductService
+public class ProductService(ProductRepo repo)
 {
-    private readonly ProductRepo _productRepo;
     
-    public ProductService(ProductRepo productRepo)
-        {
-            _productRepo = productRepo;
-        }
-
     public async Task<List<Product>> GetAllProducts()
     {
-        return await _productRepo.GetAllAsync();
+        return await repo.GetAllAsync();
     }
 
     public async Task<Product> AddAsync(Product product)
     {
-        return await _productRepo.AddAsync(product);
+        return await repo.AddAsync(product);
     }
     
     public async Task<Product?> GetByIdAsync(int id)
     {
-        return await _productRepo.GetByIdAsync(id);
+        return await repo.GetByIdAsync(id);
     }
     
      

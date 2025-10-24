@@ -4,29 +4,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repositories;
 
-public class ProductRepo
+public class ProductRepo(ApplicationDbContext dbContext)
 {
-    private readonly ApplicationDbContext  _context;
-    
-    public ProductRepo(ApplicationDbContext context)
-        {
-        _context = context;
-        }
 
     public async Task<List<Product>> GetAllAsync()
     {
-        return await _context.Products.ToListAsync();
+        return await dbContext.Products.ToListAsync();
     }
 
     public async Task<Product> AddAsync(Product product)
     {
-        await _context.Products.AddAsync(product);
-        await _context.SaveChangesAsync();
+        await dbContext.Products.AddAsync(product);
+        await dbContext.SaveChangesAsync();
         return product;
     }
 
     public async Task<Product?> GetByIdAsync(int id)
     {
-        return await _context.Products.FindAsync(id);
+        return await dbContext.Products.FindAsync(id);
     }
 }
